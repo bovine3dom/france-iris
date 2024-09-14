@@ -97,5 +97,6 @@ makeLegend()
 map.on('moveend', () => {
     const pos = map.getCenter()
     const z = map.getZoom()
-    window.location.hash = `x=${pos.lng}&y=${pos.lat}&z=${z}`
+    const l = window.location
+    history.replaceState({}, null, `${l.origin}${l.pathname}${l.search}#x=${pos.lng}&y=${pos.lat}&z=${z}`)
 })
