@@ -1,12 +1,13 @@
 # French IRIS tiled map
 
+View live here: http://o.blanthorn.com/france-iris/map/
+
 A simple data vis tool using MapLibre GL and deck.gl to display data from a CSV file joined with the French INSEE communes
 
 <p align="center">
 <img src="promo/demo.png" alt="Chloropleth map of Paris showing percentage of principal residences without cars">
 </p>
 
-View live here: http://o.blanthorn.com/france-iris/www/
 
 # How to run
 

@@ -21,7 +21,6 @@ const colourRamp = d3.scaleSequential(d3.interpolateSpectral).domain([0,1])
 
 /* convert from "rgba(r,g,b,a)" string to [r,g,b] */
 const getColour = v => Object.values(d3.color(colourRamp(v))).slice(0,-1)
-let reloadNum = 0
 const getIrisData = csvmap => {
     return new MVTLayer({
     id: 'IrisLayer',
@@ -91,7 +90,7 @@ async function makeLegend() {
     //     l.insertBefore(observablehq.legend({color: colourRamp, title: params.get('t'), tickFormat: fmt}), l.firstChild)
     // } catch (e) {
     //     console.warn(e)
-        l.insertBefore(observablehq.legend({color: colourRamp, title: params.get('t')}), l.firstChild)
+        l.insertBefore(observablehq.legend({color: colourRamp, title: "Fraction of principal residences with zero cars"}), l.firstChild)
     // }
 }
 makeLegend()
