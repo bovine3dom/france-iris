@@ -6,6 +6,8 @@ A simple data vis tool using MapLibre GL and deck.gl to display data from a CSV 
 <img src="promo/demo.png" alt="Chloropleth map of Paris showing percentage of principal residences without cars">
 </p>
 
+View live here: http://o.blanthorn.com/france-iris/www/
+
 # How to run
 
 Prerequisites: yarn. A web browser. A CSV file of IRIS code, value.
@@ -25,6 +27,15 @@ convert lambert 93 (or other) shapefile with wgs84 geojson then make tiles
 ```
 ogr2ogr -f GeoJSON -t_srs EPSG:4326 iris_2020.geojson CONTOURS-IRIS.shp 
 tippecanoe -zg --coalesce-smallest-as-needed --no-tile-compression -e tiles iris_2020.geojson # pay attention to min/max zoom in tiles directory and set to right value in deck.gl
+```
+
+# Deployment
+
+```
+yarn run build
+git add www/
+git push
+# wait a bit
 ```
 
 # Copyright

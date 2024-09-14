@@ -10,7 +10,7 @@ import * as observablehq from './vendor/observablehq' // from https://observable
 const start_pos = {...{x: 0.45, y: 51.47, z: 4}, ...Object.fromEntries(new URLSearchParams(window.location.hash.slice(1)))}
 const map = new maplibregl.Map({
     container: 'map',
-    style: 'https://api.maptiler.com/maps/toner-v2/style.json?key=Y4leWPnhJFGnTFFk1cru', // only authorised for localhost
+    style: 'https://api.maptiler.com/maps/toner-v2/style.json?key=L7Sd3jHa1AR1dtyLCTgq', // only authorised for o.blanthorn.com
     center: [start_pos.x, start_pos.y],
     zoom: start_pos.z,
     bearing: 0,
@@ -84,14 +84,15 @@ const l = document.getElementById("attribution")
 l.innerText = "© " + ["INSEE", "MapTiler",  "OpenStreetMap contributors"].filter(x=>x !== null).join(" © ")
 // todo: read impressum from metadata too
 async function makeLegend() {
-    try {
-        const d = await (await fetch("/data/meta.json")).json()
-        const fmt = v => d['scale'][Object.keys(d['scale']).map(x => [x, Math.abs(x - v)]).sort((l,r)=>l[1] - r[1])[0][0]]
-        l.insertBefore(observablehq.legend({color: colourRamp, title: params.get('t'), tickFormat: fmt}), l.firstChild)
-    } catch (e) {
-        console.warn(e)
+    // // todo: support metadata again
+    // try {
+    //     const d = await (await fetch("/data/meta.json")).json()
+    //     const fmt = v => d['scale'][Object.keys(d['scale']).map(x => [x, Math.abs(x - v)]).sort((l,r)=>l[1] - r[1])[0][0]]
+    //     l.insertBefore(observablehq.legend({color: colourRamp, title: params.get('t'), tickFormat: fmt}), l.firstChild)
+    // } catch (e) {
+    //     console.warn(e)
         l.insertBefore(observablehq.legend({color: colourRamp, title: params.get('t')}), l.firstChild)
-    }
+    // }
 }
 makeLegend()
 map.on('moveend', () => {
