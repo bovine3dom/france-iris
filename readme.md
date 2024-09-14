@@ -24,6 +24,8 @@ Prerequisites: yarn. A web browser. A CSV file of IRIS code, value.
 
 # Dealing with France
 
+IRIS contour shapefiles come from https://geoservices.ign.fr/contoursiris and then need some wrangling
+
 convert lambert 93 (or other) shapefile with wgs84 geojson then make tiles
 ```
 ogr2ogr -f GeoJSON -t_srs EPSG:4326 iris_2020.geojson CONTOURS-IRIS.shp 
@@ -38,6 +40,12 @@ git add www/
 git push
 # wait a bit
 ```
+
+# Get more data
+
+https://www.insee.fr/fr/statistiques?geo=IRIS-1
+
+Just make sure you have IRIS tiles that correspond to the data you're using
 
 # Copyright
 IRIS tiles copyright INSEE and IGN
