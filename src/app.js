@@ -27,7 +27,7 @@ const getIrisData = csvmap => {
     id: 'IrisLayer',
     minZoom: 0,
     maxZoom: 9,
-    data: '/data/shapefiles/CONTOURS-IRIS_2-1_SHP_LAMB93_FXX-2020/tiles/{z}/{x}/{y}.pbf',
+    data: 'data/shapefiles/CONTOURS-IRIS_2-1_SHP_LAMB93_FXX-2020/tiles/{z}/{x}/{y}.pbf',
     extruded: false,
     stroked: true,
     getFillColor: d => {
@@ -69,7 +69,7 @@ map.addControl(new maplibregl.NavigationControl())
 
 let csvmap = new Map()
 const update = async () => {
-    const csvdata = (await load("/data/iris_data.csv", CSVLoader)).data
+    const csvdata = (await load("data/iris_data.csv", CSVLoader)).data
     csvmap = new Map(csvdata.map(r => [r.IRIS, r.perc_voit]))
     mapOverlay.setProps({layers:[getIrisData(csvmap)]})
 }
