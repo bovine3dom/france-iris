@@ -1,6 +1,6 @@
 # French IRIS tiled map
 
-View live here: http://o.blanthorn.com/france-iris/map/
+[View live here!](https://o.blanthorn.com/france-iris/map/#x=4.844466734284424&y=45.75895982567425&z=13.537551815531074)
 
 A simple data vis tool using MapLibre GL and deck.gl to display data from a CSV file joined with the French INSEE communes
 
