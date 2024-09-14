@@ -2,7 +2,7 @@
 
 [View live here!](https://o.blanthorn.com/france-iris/map/#x=4.844466734284424&y=45.75895982567425&z=13.537551815531074)
 
-A simple data vis tool using MapLibre GL and deck.gl to display data from a CSV file joined with the French INSEE communes
+A simple data vis tool using MapLibre GL and deck.gl to display data from a CSV file joined with the French INSEE IRIS divisions of communes (approx ~3,000 people per area)
 
 <p align="center">
 <img src="promo/demo.png" alt="Chloropleth map of Paris showing percentage of principal residences without cars">
