@@ -1,5 +1,6 @@
 import {MapboxOverlay} from '@deck.gl/mapbox'
-import {MVTLayer} from '@deck.gl/geo-layers'
+import {MVTLayer, TileLayer} from '@deck.gl/geo-layers'
+import {BitmapLayer} from '@deck.gl/layers'
 import {CSVLoader} from '@loaders.gl/csv'
 import {load} from '@loaders.gl/core'
 import maplibregl from 'maplibre-gl'
@@ -66,11 +67,33 @@ const mapOverlay = new MapboxOverlay({
 map.addControl(mapOverlay)
 map.addControl(new maplibregl.NavigationControl())
 
+const choochoo = new TileLayer({
+    id: 'OpenRailwayMapLayer',
+    data: 'https://tiles.openrailwaymap.org/maxspeed/{z}/{x}/{y}.png',
+    maxZoom: 19,
+    minZoom: 0,
+
+    renderSubLayers: props => {
+        const {boundingBox} = props.tile;
+
+        return new BitmapLayer(props, {
+            data: null,
+            image: props.data,
+            bounds: [boundingBox[0][0], boundingBox[0][1], boundingBox[1][0], boundingBox[1][1]]
+        })
+    },
+    pickable: true
+})
+
 let csvmap = new Map()
 const update = async () => {
     const csvdata = (await load("data/iris_data.csv", CSVLoader)).data
     csvmap = new Map(csvdata.map(r => [r.IRIS, r.perc_voit]))
-    mapOverlay.setProps({layers:[getIrisData(csvmap)]})
+    const layers = [getIrisData(csvmap)]
+    if (params.get('trains') !== null){
+        layers.push(choochoo)
+    }
+    mapOverlay.setProps({layers})
 }
 update()
 
@@ -80,7 +103,7 @@ window.observablehq = observablehq
 
 const params = new URLSearchParams(window.location.search)
 const l = document.getElementById("attribution")
-l.innerText = "© " + ["INSEE", "MapTiler",  "OpenStreetMap contributors"].filter(x=>x !== null).join(" © ")
+l.innerText = "© " + ["INSEE", "MapTiler",  "OpenStreetMap contributors", params.get('trains') !== null ? "OpenRailwayMap" : null].filter(x=>x !== null).join(" © ")
 // todo: read impressum from metadata too
 async function makeLegend() {
     // // todo: support metadata again
